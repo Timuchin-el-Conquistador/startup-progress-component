@@ -6,7 +6,7 @@ import "./App.css";
 const initialState = {
   foundationStep: {
     achieved: false,
-    steps: {
+    actions: {
       virtualOffice: false,
       missionAndVision: false,
       businessName: false,
@@ -15,28 +15,36 @@ const initialState = {
   },
   discovery: {
     achieved: false,
-    steps: {
+    actions: {
       createRoadmap: false,
       competitorAnalysis: false,
     },
   },
   delivery: {
     achieved: false,
-    steps: {
+    actions: {
       marketingWebsite: false,
       MVP: false,
     },
   },
 };
 
-const reducerFn = (state, action) => {
-  let achieved = !state[action.type].steps[action.step];
-  const { steps } = state[action.type];
-  switch (action.type) {
+const reducerFn = (state, payload) => {
+  //steps Foundation, Discovery and Delivery
+  //actions u make to achive them
+
+
+  let achieved =
+    !state[payload.step].actions[payload.action]; /*the checkbox u clicked (if false
+     then step achived iis false and no sense of traversing actions hashmap )*/
+  const { actions } = state[payload.step];  //progress step fetching all actions required
+  switch (payload.step) {
     case "foundationStep":
-      for (let step in steps) {
-        if (step !== action.step && steps[step] === false) {
-          achieved = false;
+      if (achieved) {   //if false no sense traversing actions and step is not achieved
+        for (let action in actions) {
+          if (action !== payload.action && actions[action] === false) {
+            achieved = false;
+          }
         }
       }
       state = {
@@ -44,17 +52,19 @@ const reducerFn = (state, action) => {
         foundationStep: {
           ...state.foundationStep,
           achieved,
-          steps: {
-            ...state.foundationStep.steps,
-            [action.step]: !state.foundationStep.steps[action.step],
+          actions: {
+            ...state.foundationStep.actions,
+            [payload.action]: !state.foundationStep.actions[payload.action],
           },
         },
       };
       break;
     case "discovery":
-      for (let step in steps) {
-        if (step !== action.step && steps[step] === false) {
-          achieved = false;
+      if (achieved) {
+        for (let action in actions) {
+          if (action !== payload.action && actions[action] === false) {
+            achieved = false;
+          }
         }
       }
       state = {
@@ -62,17 +72,19 @@ const reducerFn = (state, action) => {
         discovery: {
           ...state.discovery,
           achieved,
-          steps: {
-            ...state.discovery.steps,
-            [action.step]: !state.discovery.steps[action.step],
+          actions: {
+            ...state.discovery.actions,
+            [payload.action]: !state.discovery.actions[payload.action],
           },
         },
       };
       break;
     case "delivery":
-      for (let step in steps) {
-        if (step !== action.step && steps[step] === false) {
-          achieved = false;
+      if (achieved) {
+        for (let action in actions) {
+          if (action !== payload.action && actions[action] === false) {
+            achieved = false;
+          }
         }
       }
       state = {
@@ -80,9 +92,9 @@ const reducerFn = (state, action) => {
         delivery: {
           ...state.delivery,
           achieved,
-          steps: {
-            ...state.delivery.steps,
-            [action.step]: !state.delivery.steps[action.step],
+          actions: {
+            ...state.delivery.actions,
+            [payload.action]: !state.delivery.actions[payload.action],
           },
         },
       };
@@ -113,15 +125,15 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.foundationStep.steps.virtualOffice ? "active" : null
+                  state.foundationStep.actions.virtualOffice ? "active" : null
                 }`}
               />
               <input
                 type="checkbox"
                 id="virtual-office"
                 onChange={() => {
-                  console.log("check");
-                  setState({ type: "foundationStep", step: "virtualOffice" });
+              
+                  setState({ step: "foundationStep", action: "virtualOffice" });
                 }}
               />
             </div>
@@ -131,7 +143,7 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.foundationStep.steps.missionAndVision ? "active" : null
+                  state.foundationStep.actions.missionAndVision ? "active" : null
                 }`}
               />
               <input
@@ -139,8 +151,8 @@ function App() {
                 id="missionAndVision"
                 onChange={() => {
                   setState({
-                    type: "foundationStep",
-                    step: "missionAndVision",
+                    step: "foundationStep",
+                    action: "missionAndVision",
                   });
                 }}
               />
@@ -151,14 +163,14 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.foundationStep.steps.businessName ? "active" : null
+                  state.foundationStep.actions.businessName ? "active" : null
                 }`}
               />
               <input
                 type="checkbox"
                 id="businessName"
                 onChange={() => {
-                  setState({ type: "foundationStep", step: "businessName" });
+                  setState({ step: "foundationStep", action: "businessName" });
                 }}
               />
             </div>
@@ -168,14 +180,14 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.foundationStep.steps.domains ? "active" : null
+                  state.foundationStep.actions.domains ? "active" : null
                 }`}
               />
               <input
                 type="checkbox"
                 id="domains"
                 onChange={() => {
-                  setState({ type: "foundationStep", step: "domains" });
+                  setState({ step: "foundationStep", action: "domains" });
                 }}
               />
             </div>
@@ -192,14 +204,14 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.discovery.steps.createRoadmap ? "active" : null
+                  state.discovery.actions.createRoadmap ? "active" : null
                 }`}
               />
               <input
                 type="checkbox"
                 id="createRoadmap"
                 onChange={() => {
-                  setState({ type: "discovery", step: "createRoadmap" });
+                  setState({ step: "discovery", action: "createRoadmap" });
                 }}
               />
             </div>
@@ -209,14 +221,14 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.discovery.steps.competitorAnalysis ? "active" : null
+                  state.discovery.actions.competitorAnalysis ? "active" : null
                 }`}
               />
               <input
                 type="checkbox"
                 id="competitorAnalysis"
                 onChange={() => {
-                  setState({ type: "discovery", step: "competitorAnalysis" });
+                  setState({ step: "discovery", action: "competitorAnalysis" });
                 }}
               />
             </div>
@@ -233,14 +245,14 @@ function App() {
             <div className="checkbox">
               <div
                 className={`${
-                  state.delivery.steps.marketingWebsite ? "active" : null
+                  state.delivery.actions.marketingWebsite ? "active" : null
                 }`}
               />
               <input
                 type="checkbox"
                 id="marketingWebsite"
                 onChange={() => {
-                  setState({ type: "delivery", step: "marketingWebsite" });
+                  setState({ step: "delivery", action: "marketingWebsite" });
                 }}
               />
             </div>
@@ -249,13 +261,13 @@ function App() {
           <li>
             <div className="checkbox">
               <div
-                className={`${state.delivery.steps.MVP ? "active" : null}`}
+                className={`${state.delivery.actions.MVP ? "active" : null}`}
               />
               <input
                 type="checkbox"
                 id="MVP"
                 onChange={() => {
-                  setState({ type: "delivery", step: "MVP" });
+                  setState({ step: "delivery", action: "MVP" });
                 }}
               />
             </div>
