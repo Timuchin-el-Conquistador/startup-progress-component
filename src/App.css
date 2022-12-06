@@ -43,7 +43,7 @@
   height: 15px;
   background: black;
   position: absolute;
-  right: 30px;
+  right: 28px;
   top: 10px;
   transform: rotate(-40deg);
 }/*if one of the step has all active then we have check*/
