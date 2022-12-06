@@ -1,38 +1,133 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.progress{
+  background-color: white !important;
+  width: 300px;
+  height: fit-content;
+  padding: 20px 10px 10px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+  
+}  /*main component container*/
+
+.progress h1{
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing:0.05rem;
+  margin-bottom: 20px;
+  width: 80%;
+}  
+
+.progress .step{
+  display: flex;
+  align-items: center;
+  font-size: 21px;
+  min-width: 80%;
+  position: relative;
+  margin-bottom: 17px;
+} /*Foundation, discover and delivery*/
+
+.progress .active::after{
+  content: '';
+  width: 34px;
+  height: 7px;
+  background: black;
+  position: absolute;
+  right: 0;
+  top: 9px;
+  transform: rotate(-40deg);
+}  
+.progress .active::before{
+  content: '';
+  width: 7px;
+  height: 15px;
+  background: black;
+  position: absolute;
+  right: 30px;
+  top: 10px;
+  transform: rotate(-40deg);
+}/*if one of the step has all active then we have check*/
+
+
+.progress .step span{
+
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: black;
+  color:white;
+  font-size: 16px;
+  text-align: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  margin-right: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.progress .steps{
+  width: 80%;
+  margin: 15px 0;
+}
+.progress .steps ul li{
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.progress .steps ul li label{
+   margin-left: 10px
+}
+.progress .steps .checkbox{
+  width: 18px;
+height: 18px;
+position: relative;
+border-radius: 5px;
+border-color: transparent;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.progress .steps .checkbox input[type=checkbox]{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+
+.progress .steps .checkbox > div{
+  position: absolute;
+width: 100%;
+height: 20px;
+border-radius: 5px;
+border: 2px solid rgb(202, 202, 202);
+z-index: 100;
+left: -1px;
+top: -1px;
+pointer-events: none;
+background-color: white;
+}
+
+.progress .steps .checkbox  .active{
+  background: #5c33cf;
+  border-color: #5c33cf;;
+}
+
+.progress .steps .checkbox > div::after{
+  content: '';
+  width: 2px;
+  height: 7px;
+  background: white;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
+  transform: rotate(-40deg);
+}
+.progress .steps .checkbox > div::before{
+  content: '';
+  width: 12px;
+  height: 2px;
+  background: white;
+  position: absolute;
+  left: 6px;
+  top: 9px;
+  transform: rotate(-40deg);
+
 }
