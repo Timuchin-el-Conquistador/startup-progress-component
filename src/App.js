@@ -36,7 +36,7 @@ const reducerFn = (state, payload) => {
 
   let achieved =
     !state[payload.step].actions[payload.action]; /*the checkbox u clicked (if false
-     then step achived iis false and no sense of traversing actions hashmap )*/
+     then step achived is false and no sense of traversing actions hashmap )*/
   const { actions } = state[payload.step];  //progress step fetching all actions required
   switch (payload.step) {
     case "foundationStep":
@@ -119,7 +119,7 @@ function App() {
       >
         <span>1</span>Foundation
       </div>
-      <div className="steps">
+      <div className="actions">
         <ul>
           <li>
             <div className="checkbox">
@@ -198,7 +198,7 @@ function App() {
       <div className={`step ${state.discovery.achieved ? "active" : null}`}>
         <span>2</span>Discovery
       </div>
-      <div className="steps">
+      <div className="actions">
         <ul>
           <li>
             <div className="checkbox">
@@ -239,7 +239,7 @@ function App() {
       <div className={`step ${state.delivery.achieved ? "active" : null}`}>
         <span>3</span>Delivery
       </div>
-      <div className="steps">
+      <div className="actions">
         <ul>
           <li>
             <div className="checkbox">

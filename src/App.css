@@ -16,7 +16,7 @@
   letter-spacing:0.05rem;
   margin-bottom: 20px;
   width: 80%;
-}  
+}    /*main header  n this component, u can change to h2 or h3*/
 
 .progress .step{
   display: flex;
@@ -46,7 +46,7 @@
   right: 28px;
   top: 10px;
   transform: rotate(-40deg);
-}/*if one of the step has all active then we have check*/
+}/*if we did all actions required to achieve the step then ull see a check*/
 
 
 .progress .step span{
@@ -62,21 +62,24 @@
    justify-content: center;
    align-items: center;
   margin-right: 20px;
-}
+}  /*step name*/
 
-.progress .steps{
+.progress .actions{  /*the container  of the list of  all actions required to achieve a step*/
   width: 80%;
   margin: 15px 0;
-}
-.progress .steps ul li{
+} 
+.progress .actions ul li{
   display: flex;
   align-items: center;
   margin-bottom: 15px;
 }
-.progress .steps ul li label{
+.progress .actions ul li label{
    margin-left: 10px
 }
-.progress .steps .checkbox{
+
+
+/*custom checkbox container*/
+.progress .actions .checkbox{
   width: 18px;
 height: 18px;
 position: relative;
@@ -84,7 +87,7 @@ border-radius: 5px;
 border-color: transparent;
 }
 
-.progress .steps .checkbox input[type=checkbox]{
+.progress .actions .checkbox input[type=checkbox]{
   position: absolute;
   width: 100%;
   height: 100%;
@@ -92,7 +95,7 @@ border-color: transparent;
 }
 
 
-.progress .steps .checkbox > div{
+.progress .actions .checkbox > div{
   position: absolute;
 width: 100%;
 height: 20px;
@@ -103,14 +106,14 @@ left: -1px;
 top: -1px;
 pointer-events: none;
 background-color: white;
-}
+} /*custom checkbox*/
 
-.progress .steps .checkbox  .active{
+.progress .actions .checkbox  .active{
   background: #5c33cf;
   border-color: #5c33cf;;
-}
+} /*checkbox active*/
 
-.progress .steps .checkbox > div::after{
+.progress .actions .checkbox > div::after{
   content: '';
   width: 2px;
   height: 7px;
@@ -120,7 +123,7 @@ background-color: white;
   left: 5px;
   transform: rotate(-40deg);
 }
-.progress .steps .checkbox > div::before{
+.progress .actions .checkbox > div::before{
   content: '';
   width: 12px;
   height: 2px;
